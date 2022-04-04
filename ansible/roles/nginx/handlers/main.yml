@@ -1,0 +1,5 @@
+# Empty main.yml file for handlers folder
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

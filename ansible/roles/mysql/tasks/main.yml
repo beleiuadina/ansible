@@ -1,0 +1,33 @@
+- name: Install MySQL server
+  apt:
+    name: mysql-server
+    state: present
+
+- name: Install PyMySQL driver
+  apt:
+    name: python3-pymysql
+    state: present
+
+- name: Copy MySQL config file
+  copy:
+    src: mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    owner: root
+    group: root
+    mode: 644
+  notify:
+    - restart mysql
+
+- name: Create the wordpress database
+  mysql_db:
+    login_user: root
+    name: wordpress
+    state: present
+
+- name: Create the wordpress user
+  mysql_user:
+    name: wpadmin
+    password: password
+    priv: 'wordpress.*:GRANT'
+    state: present
+

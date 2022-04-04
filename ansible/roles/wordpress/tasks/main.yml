@@ -1,0 +1,21 @@
+- name: Download Wordpress
+  get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /tmp/latest.tar.gz
+
+- name: Unpack Wordpress
+  unarchive:
+    src: /tmp/latest.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Move to WWW folder
+  copy:
+    src: /tmp/wordpress
+    dest: /var/www/html
+    remote_src: yes
+    
+- name: Copy wp-config
+  copy:
+    src: wp-config.php
+    dest: /var/www/html/wordpress

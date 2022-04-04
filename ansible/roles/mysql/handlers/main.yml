@@ -1,0 +1,5 @@
+# Empty main.yml file for handlers folder
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted

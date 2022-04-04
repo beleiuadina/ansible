@@ -1,0 +1,9 @@
+- name: Install PHP-FPM
+  apt:
+    name: php{{ php_version }}-fpm
+    state: present
+  
+- name: Install php-mysql library
+  apt:
+    name: php{{ php_version}}-mysql
+    state: present

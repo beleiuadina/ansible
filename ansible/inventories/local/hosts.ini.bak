@@ -1,0 +1,19 @@
+load-balancer ansible_host=192.168.56.11 ansible_user=ansible 
+app-server-1 ansible_host=192.168.56.12 ansible_user=ansible 
+app-server-2 ansible_host=192.168.56.13 ansible_user=ansible 
+database ansible_host=192.168.56.14 ansible_user=ubuntu 
+
+[all]
+load-balancer
+app-server-1
+app-server-2
+database
+
+[webservers]
+load-balancer
+app-server-1
+app-server-2
+
+[wordpress]
+app-server-1
+app-server-2

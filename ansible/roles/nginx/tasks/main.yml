@@ -1,0 +1,21 @@
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Copy LB configuration
+  copy:
+    src: lb
+    dest: /etc/nginx/sites-available/default
+  when: ansible_facts['hostname'] == "load-balancer"
+  notify:
+    - restart nginx
+
+- name: Copy Wordpress Nginx configurations
+  copy:
+    src: app
+    dest: /etc/nginx/sites-available/default
+  when: (ansible_facts['hostname'] == "application-server-1") or (ansible_facts['hostname'] == "application-server-2")
+  notify:
+    - restart nginx
+  
